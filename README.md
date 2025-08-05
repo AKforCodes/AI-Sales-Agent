@@ -38,40 +38,35 @@ Make sure you have the following software installed:
 
 ### Installation & Setup
 
-**1. Clone the Repository**
+1. Clone the Repository
 ```bash
-git clone [https://github.com/AKforCodes/AI-Sales-Agent-for-Distributors.git](https://github.com/AKforCodes/AI-Sales-Agent-for-Distributors.git)
+git clone https://github.com/AKforCodes/AI-Sales-Agent-for-Distributors.git
 cd AI-Sales-Agent-for-Distributors
-
+```
 
 2. Backend Setup
 
 First, set up the database and the Python environment.
 
 Navigate to the backend directory:
-
-Bash
-
+```bash
 cd backend
+```
+
 Setup PostgreSQL:
+- Start your PostgreSQL server
+- Connect to it using psql or a GUI tool like pgAdmin
+- Create a new database for the project:
 
-Start your PostgreSQL server.
-
-Connect to it using psql or a GUI tool like pgAdmin.
-
-Create a new database for the project:
-
-SQL
-
+```sql
 CREATE DATABASE sales_db;
+```
+
 Configure Environment Variables:
+- Create a `.env` file in the backend directory
+- Add your database URL and API keys to it. Replace the placeholders with your actual credentials:
 
-Create a .env file in the backend directory.
-
-Add your database URL and API keys to it. Replace the placeholders with your actual credentials.
-
-Code snippet
-
+```bash
 # backend/.env
 
 # PostgreSQL Database URL
@@ -83,96 +78,92 @@ OPENAI_API_KEY="sk-..."
 # Google Custom Search API Keys
 GOOGLE_CSE_ID="YOUR_SEARCH_ENGINE_ID_HERE"
 GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY_HERE"
+```
+
 Setup Python Environment and Dependencies:
+- Create and activate a Python virtual environment:
 
-Create and activate a Python virtual environment:
-
-Bash
-
+```bash
 python -m venv venv
 # On Windows
 .\venv\Scripts\Activate.ps1
 # On macOS/Linux
 source venv/bin/activate
-Install the required Python packages from the requirements.txt file:
+```
 
-Bash
+- Install the required Python packages:
 
+```bash
 pip install -r requirements.txt
+```
+
 Seed the Database:
-Run the seed script to create the necessary tables and populate them with sample data.
+- Run the seed script to create the necessary tables and populate them with sample data:
 
-Bash
-
+```bash
 python scripts/seed_db.py
+```
+
 3. Frontend Setup
 
-Next, set up the Next.js chat interface.
-
 Navigate to the frontend directory (from the project root):
-
-Bash
-
+```bash
 cd frontend
+```
+
 Configure Environment Variables:
+- Create a file named `.env.local` in the frontend directory
+- Add the URL of your backend API:
 
-Create a file named .env.local in the frontend directory.
-
-Add the URL of your backend API:
-
-Code snippet
-
+```bash
 # frontend/.env.local
-NEXT_PUBLIC_API_URL=[http://127.0.0.1:8000](http://127.0.0.1:8000)
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+```
+
 Install Dependencies:
-Install the required Node.js packages from the package.json file.
-
-Bash
-
+```bash
 npm install
-Running the Application
+```
+
+## Running the Application
+
 To run the full-stack application, you will need two separate terminals.
 
 1. Terminal 1: Start the Backend
+- Navigate to the backend directory
+- Activate your virtual environment (`.\venv\Scripts\Activate.ps1` or `source venv/bin/activate`)
+- Start the FastAPI server with Uvicorn:
 
-Navigate to the backend directory.
-
-Activate your virtual environment (.\venv\Scripts\Activate.ps1 or source venv/bin/activate).
-
-Start the FastAPI server with Uvicorn:
-
-Bash
-
+```bash
 uvicorn app.main:app --reload
+```
+
 The backend will be running on http://127.0.0.1:8000.
 
 2. Terminal 2: Start the Frontend
+- Navigate to the frontend directory
+- Start the Next.js development server:
 
-Navigate to the frontend directory.
-
-Start the Next.js development server:
-
-Bash
-
+```bash
 npm run dev
+```
+
 The frontend will be running on http://localhost:3000.
 
 3. Access the Application
+- Open your web browser and go to http://localhost:3000
+- You can now interact with the AI Sales Agent through the chat interface
 
-Open your web browser and go to http://localhost:3000.
+## Running with Docker (Backend Only)
 
-You can now interact with the AI Sales Agent through the chat interface.
-
-Running with Docker (Backend Only)
 You can also run the backend server inside a Docker container.
 
 Build the Docker image from the backend directory:
-
-Bash
-
+```bash
 docker build -t ai-sales-agent .
-Run the container. This command maps the container's port 8000 to your machine's port 8000 and passes the environment variables from your local .env file.
+```
 
-Bash
-
+Run the container:
+```bash
 docker run -p 8000:8000 --env-file .env ai-sales-agent
+```
