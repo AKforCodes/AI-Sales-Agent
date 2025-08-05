@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-900 text-gray-100;
+}
+
+/* For ChatMessage component to render markdown styles */
+.prose {
+  @apply text-gray-100;
+}
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  @apply text-white;
+}
+.prose strong {
+  @apply text-white;
+}
+.prose a {
+  @apply text-blue-400 hover:text-blue-300;
+}
+.prose ul {
+    @apply list-disc list-inside;
+}
+.prose hr {
+    @apply border-gray-600;
+}
